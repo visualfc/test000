@@ -1,0 +1,36 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go+
+        uses: goplus/setup-goplus@v1
+        with:
+          go-version: "1.20"
+          gop-version: "1.1.13"
+      
+      - name: Test env
+        run: |
+          go env
+          gop env
+
+      - name: Build all
+        run: go build ./...
+
+      - name: Build tutorial
+        run: gop build ./demo
+
+      - name: Test
+        run: go test -v ./...
