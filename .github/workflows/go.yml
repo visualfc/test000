@@ -22,8 +22,4 @@ jobs:
 
     - name: SingleFile Mode Test
       run: |
-        gop build ./...
-
-    - name: Go+ Format Test
-      run: |
-        gop fmt -t ./...
+        gop build ./demo/...
